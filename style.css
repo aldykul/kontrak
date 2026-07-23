@@ -1,80 +1,236 @@
+/* ================================
+   GLOBAL SETTING
+================================ */
+
+*{
+    box-sizing:border-box;
+}
+
+
 body{
 
-font-family:'Segoe UI';
-background:
-linear-gradient(135deg,#071952,#088395);
+    margin:0;
+    padding:0;
 
-height:100vh;
+    font-family:
+    'Segoe UI',
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
 
-display:flex;
+    min-height:100vh;
 
-justify-content:center;
+    background:
+    linear-gradient(
+        135deg,
+        #071952,
+        #088395,
+        #37B7C3
+    );
 
-align-items:center;
+    color:white;
 
-color:white;
+}
+
+
+/* ================================
+   CONTAINER
+================================ */
+
+
+.container{
+
+    width:90%;
+    max-width:900px;
+
+    margin:30px auto;
 
 }
 
 
 
-.game{
+/* ================================
+   HEADER
+================================ */
 
-width:500px;
 
-background:#ffffff20;
+.header{
 
-padding:30px;
+    text-align:center;
 
-border-radius:20px;
+    padding:30px;
 
-backdrop-filter:blur(10px);
+    background:
+    rgba(255,255,255,0.12);
 
-box-shadow:0 10px 30px black;
+    border-radius:25px;
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.3);
+
+    animation:
+    slideDown 0.8s ease;
+
+}
+
+
+
+.header h1{
+
+    font-size:42px;
+
+    margin:0;
+
+    color:#FFD93D;
+
+    text-shadow:
+    0 0 15px rgba(255,217,61,0.7);
+
+}
+
+
+.header h2{
+
+    margin:10px 0;
 
 }
 
 
 
-h1{
+/* ================================
+   CARD
+================================ */
 
-text-align:center;
 
-color:#FFD93D;
+.card,
+.contract{
+
+
+    margin-top:25px;
+
+
+    padding:30px;
+
+
+    background:
+    rgba(255,255,255,0.15);
+
+
+    border-radius:25px;
+
+
+    backdrop-filter:
+    blur(15px);
+
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,0.25);
+
+
+    animation:
+    fadeIn 0.5s ease;
+
 
 }
 
 
 
-input{
 
-width:90%;
+.card h3{
 
-padding:12px;
 
-border-radius:10px;
+    color:#FFD93D;
 
-border:none;
+    font-size:24px;
+
 
 }
 
+
+
+/* ================================
+ INPUT
+================================ */
+
+
+input,
+select{
+
+
+    width:100%;
+
+
+    padding:14px;
+
+
+    margin:
+    10px 0 20px 0;
+
+
+    border:none;
+
+
+    border-radius:15px;
+
+
+    font-size:16px;
+
+
+}
+
+
+
+
+
+/* ================================
+ BUTTON
+================================ */
 
 
 button{
 
-margin-top:20px;
 
-padding:12px 20px;
+    width:100%;
 
-border:none;
 
-border-radius:20px;
+    padding:15px;
 
-background:#FFD93D;
 
-cursor:pointer;
+    margin-top:15px;
 
-font-weight:bold;
+
+    border:none;
+
+
+    border-radius:20px;
+
+
+    cursor:pointer;
+
+
+    font-size:16px;
+
+
+    font-weight:bold;
+
+
+    color:#071952;
+
+
+    background:
+    linear-gradient(
+        135deg,
+        #FFD93D,
+        #FF9F29
+    );
+
+
+    transition:
+    0.3s;
+
 
 }
 
@@ -82,28 +238,416 @@ font-weight:bold;
 
 button:hover{
 
-transform:scale(1.05);
+
+    transform:
+    translateY(-5px)
+    scale(1.03);
+
+
+    box-shadow:
+    0 10px 20px
+    rgba(0,0,0,0.3);
+
 
 }
 
 
 
-.choice{
 
-display:block;
 
-width:100%;
+/* ================================
+ OPTION BUTTON GAME
+================================ */
 
-margin:10px;
 
-background:#00DFA2;
+#missionOption button,
+.vote-box button,
+.learning-choice button{
+
+
+    background:
+    linear-gradient(
+        135deg,
+        #00DFA2,
+        #00A884
+    );
+
+
+    color:white;
+
 
 }
 
+
+
+
+
+#missionOption button:hover,
+.vote-box button:hover,
+.learning-choice button:hover{
+
+
+    background:
+    linear-gradient(
+        135deg,
+        #37B7C3,
+        #071952
+    );
+
+
+}
+
+
+
+
+
+
+/* ================================
+ CHECKBOX
+================================ */
+
+
+label{
+
+
+    display:block;
+
+
+    margin:
+    12px 0;
+
+
+    font-size:17px;
+
+
+}
+
+
+
+input[type="checkbox"]{
+
+
+    width:auto;
+
+    transform:
+    scale(1.3);
+
+    margin-right:10px;
+
+}
+
+
+
+
+/* ================================
+ HIDDEN
+================================ */
 
 
 .hidden{
 
-display:none;
+    display:none;
+
+}
+
+
+
+
+
+
+/* ================================
+ CONTRACT RESULT
+================================ */
+
+
+
+.contract{
+
+
+    background:white;
+
+
+    color:#111;
+
+
+}
+
+
+
+.contract h2{
+
+
+    text-align:center;
+
+
+    color:#071952;
+
+
+}
+
+
+
+
+
+#contractResult{
+
+
+    line-height:1.8;
+
+
+    padding:20px;
+
+
+    border:
+    2px dashed #088395;
+
+
+    border-radius:15px;
+
+
+}
+
+
+
+
+
+/* ================================
+ SIGNATURE
+================================ */
+
+
+.signature-area{
+
+
+    display:flex;
+
+
+    justify-content:space-around;
+
+
+    text-align:center;
+
+
+    margin-top:50px;
+
+
+    color:#111;
+
+
+}
+
+
+
+
+
+
+
+/* ================================
+ ANIMATION
+================================ */
+
+
+@keyframes fadeIn{
+
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(30px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
+
+
+}
+
+
+
+@keyframes slideDown{
+
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(-50px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* ================================
+ RESPONSIVE HP
+================================ */
+
+
+@media(max-width:600px){
+
+
+.container{
+
+    width:95%;
+
+}
+
+
+
+.header h1{
+
+
+    font-size:32px;
+
+
+}
+
+
+
+.card,
+.contract{
+
+
+    padding:20px;
+
+
+}
+
+
+
+.signature-area{
+
+
+    flex-direction:column;
+
+
+    gap:40px;
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+/* ================================
+ PRINT A4
+================================ */
+
+
+@media print{
+
+
+body{
+
+
+    background:white;
+
+
+    color:black;
+
+
+}
+
+
+
+.container{
+
+
+    width:100%;
+
+
+    margin:0;
+
+
+}
+
+
+
+.header,
+.card{
+
+
+    display:none;
+
+
+}
+
+
+
+.contract{
+
+
+    display:block;
+
+
+    background:white;
+
+
+    color:black;
+
+
+    box-shadow:none;
+
+
+    border:none;
+
+
+}
+
+
+
+.contract button{
+
+
+    display:none;
+
+
+}
+
+
+
+.contract h2{
+
+
+    color:black;
+
+
+}
+
+
 
 }
