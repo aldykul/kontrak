@@ -1,50 +1,102 @@
+/* ==========================================
+   TKJ ACADEMY
+   KONTRAK BELAJAR XI TKJ
+========================================== */
 
-let siswa="";
 
-let level=0;
+/* ==========================================
+   VARIABLE DATA
+========================================== */
 
 
-const mission=[
+let student = {
+
+    nama:"",
+    kelas:"XI TKJ",
+
+    attendance:"",
+    sumatif:"",
+    akhir:"",
+
+    learningStyle:"",
+    media:"",
+
+    behavior:[]
+
+};
+
+
+
+let currentMission = 0;
+
+
+
+let assessmentVote = {
+
+    "20-40-40":0,
+    "15-50-35":0,
+    "20-50-30":0
+
+};
+
+
+
+
+
+/* ==========================================
+   DATA MISI
+========================================== */
+
+
+const missions=[
 
 
 {
 
 title:"🚀 Misi 1 : Kehadiran",
 
-text:"Bagaimana komitmen kamu terhadap kehadiran kelas XI TKJ?",
+description:
+
+"Bagaimana komitmen kamu terhadap kehadiran selama pembelajaran TKJ?",
+
 
 options:[
 
-"Saya hadir tepat waktu minimal 90%",
+"Hadir tepat waktu minimal 90%",
 
-"Saya datang jika ada pelajaran penting",
+"Kadang terlambat tetapi tetap mengikuti pembelajaran",
 
-"Saya sering terlambat"
+"Sering tidak hadir"
 
 ]
+
 
 },
 
 
-{
 
+{
 
 title:"📚 Misi 2 : Asesmen Sumatif",
 
-text:"Bagaimana sikap kamu terhadap tugas dan proses belajar?",
+description:
+
+"Bagaimana sikap kamu terhadap tugas, proyek, dan proses belajar?",
 
 
 options:[
 
-"Mengerjakan tugas tepat waktu dan aktif belajar",
+"Mengerjakan tugas tepat waktu dan aktif dalam proses",
 
-"Mengerjakan jika diingatkan",
+"Mengerjakan jika sudah diingatkan",
 
 "Sering menunda tugas"
 
 ]
 
+
 },
+
 
 
 
@@ -52,36 +104,46 @@ options:[
 
 title:"🎯 Misi 3 : Asesmen Akhir",
 
-text:"Bagaimana persiapan menghadapi ujian akhir?",
+description:
+
+"Bagaimana persiapan kamu menghadapi asesmen akhir?",
+
 
 options:[
 
-"Belajar bertahap dan memahami materi",
+"Belajar bertahap memahami konsep",
 
-"Belajar hanya saat ujian",
+"Belajar ketika mendekati ujian",
 
-"Tidak membuat persiapan"
+"Tidak melakukan persiapan"
 
 ]
 
+
 },
+
+
 
 
 {
 
 title:"🤝 Misi 4 : Perilaku",
 
-text:"Bagaimana sikap profesional siswa TKJ?",
+description:
+
+"Bagaimana sikap seorang siswa TKJ profesional?",
+
 
 options:[
 
-"Disiplin, menghargai teman dan guru",
+"Disiplin, bertanggung jawab, menghargai orang lain",
 
-"Kadang mengikuti aturan",
+"Mengikuti aturan jika diperlukan",
 
-"Tidak terlalu peduli aturan"
+"Kurang peduli aturan"
 
 ]
+
 
 }
 
@@ -90,86 +152,126 @@ options:[
 
 
 
-function mulai(){
-
-siswa=document.getElementById("nama").value;
 
 
-if(siswa==""){
+/* ==========================================
+   START GAME
+========================================== */
 
-alert("Isi nama dahulu");
+
+function startGame(){
+
+
+let nama =
+document.getElementById("namaSiswa").value;
+
+
+
+if(nama.trim()==""){
+
+
+alert(
+"Silakan masukkan nama terlebih dahulu"
+);
+
 
 return;
 
+
 }
 
 
-document.getElementById("player")
+
+student.nama=nama;
+
+
+
+document
+.getElementById("identity")
 .classList.add("hidden");
 
 
-document.getElementById("gameArea")
+
+document
+.getElementById("gameSection")
 .classList.remove("hidden");
 
 
-tampilkan();
+
+showMission();
+
+
 
 }
 
 
 
-function tampilkan(){
 
 
-let m=mission[level];
+/* ==========================================
+   MENAMPILKAN MISI
+========================================== */
 
 
-document.getElementById("missionTitle")
-.innerHTML=m.title;
-
-
-document.getElementById("missionText")
-.innerHTML=m.text;
+function showMission(){
 
 
 
-let box=document.getElementById("choices");
-
-box.innerHTML="";
-
-
-m.options.forEach((x)=>{
+let mission =
+missions[currentMission];
 
 
-let btn=document.createElement("button");
+
+document
+.getElementById("missionTitle")
+.innerHTML=
+mission.title;
 
 
-btn.className="choice";
 
-btn.innerHTML=x;
-
-
-btn.onclick=function(){
-
-level++;
+document
+.getElementById("missionDescription")
+.innerHTML=
+mission.description;
 
 
-if(level<mission.length){
 
-tampilkan();
-
-}
-
-else{
-
-selesai();
-
-}
-
-}
+let optionBox =
+document.getElementById("missionOption");
 
 
-box.appendChild(btn);
+
+optionBox.innerHTML="";
+
+
+
+mission.options.forEach(
+(option,index)=>{
+
+
+let button =
+document.createElement("button");
+
+
+
+button.innerHTML=
+option;
+
+
+
+button.onclick=function(){
+
+
+saveMission(index);
+
+
+
+};
+
+
+
+optionBox.appendChild(button);
+
 
 
 });
@@ -179,34 +281,473 @@ box.appendChild(btn);
 
 
 
-function selesai(){
 
 
-document.getElementById("gameArea")
-.classList.add("hidden");
+/* ==========================================
+   SIMPAN JAWABAN MISI
+========================================== */
 
 
-document.getElementById("result")
-.classList.remove("hidden");
+function saveMission(answer){
 
 
-document.getElementById("hasil")
-.innerHTML=
 
-`saya <b>${siswa}</b> menyatakan siap mengikuti kontrak belajar kelas XI TKJ Semester 1 dengan komitmen:
-<br><br>
+if(currentMission==0){
 
-✅ Kehadiran disiplin<br>
-✅ Menyelesaikan tugas dan proses belajar<br>
-✅ Mengikuti asesmen akhir dengan tanggung jawab<br>
-✅ Menjaga perilaku profesional sebagai siswa TKJ`;
+student.attendance=
+missions[0].options[answer];
 
 }
 
+
+if(currentMission==1){
+
+student.sumatif=
+missions[1].options[answer];
+
+}
+
+
+
+if(currentMission==2){
+
+student.akhir=
+missions[2].options[answer];
+
+}
+
+
+
+currentMission++;
+
+
+
+if(currentMission < missions.length){
+
+
+showMission();
+
+
+}
+
+else{
+
+
+document
+.getElementById("gameSection")
+.classList.add("hidden");
+
+
+
+document
+.getElementById("assessmentSection")
+.classList.remove("hidden");
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+/* ==========================================
+   VOTE BOBOT NILAI
+========================================== */
+
+
+function voteAssessment(value){
+
+
+
+assessmentVote[value]++;
+
+
+
+let result =
+value.split("-");
+
+
+
+student.nilai = {
+
+
+kehadiran:
+result[0]+"%",
+
+
+sumatif:
+result[1]+"%",
+
+
+akhir:
+result[2]+"%"
+
+
+};
+
+
+
+alert(
+"Vote berhasil disimpan"
+);
+
+
+
+document
+.getElementById("assessmentSection")
+.classList.add("hidden");
+
+
+
+document
+.getElementById("learningSection")
+.classList.remove("hidden");
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   DIAGNOSTIK GAYA BELAJAR
+========================================== */
+
+
+function chooseLearning(style){
+
+
+student.learningStyle=style;
+
+
+
+document
+.getElementById("learningSection")
+.classList.add("hidden");
+
+
+
+document
+.getElementById("mediaSection")
+.classList.remove("hidden");
+
+
+
+}
+
+
+
+
+
+
+/* ==========================================
+   MEDIA PEMBELAJARAN
+========================================== */
+
+
+function chooseMedia(media){
+
+
+
+student.media=media;
+
+
+
+document
+.getElementById("mediaSection")
+.classList.add("hidden");
+
+
+
+document
+.getElementById("behaviorSection")
+.classList.remove("hidden");
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   GENERATE KONTRAK
+========================================== */
+
+
+function generateContract(){
+
+
+
+let checklist =
+document.querySelectorAll(
+"#behaviorSection input[type='checkbox']:checked"
+);
+
+
+
+student.behavior=[];
+
+
+
+checklist.forEach(
+(item)=>{
+
+
+student.behavior.push(item.value);
+
+
+});
+
+
+
+
+if(student.behavior.length==0){
+
+
+alert(
+"Pilih minimal satu komitmen"
+);
+
+
+return;
+
+
+}
+
+
+
+saveData();
+
+
+
+showContract();
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================
+   SIMPAN DATA
+========================================== */
+
+
+function saveData(){
+
+
+
+localStorage.setItem(
+
+"KontrakTKJ",
+
+JSON.stringify(student)
+
+);
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================
+   HASIL KONTRAK
+========================================== */
+
+
+function showContract(){
+
+
+
+document
+.getElementById("behaviorSection")
+.classList.add("hidden");
+
+
+
+document
+.getElementById("resultSection")
+.classList.remove("hidden");
+
+
+
+
+
+let behaviorText="";
+
+
+
+student.behavior.forEach(
+(item)=>{
+
+
+behaviorText +=
+"✔ "+item+
+"<br>";
+
+
+});
+
+
+
+
+
+
+document
+.getElementById("contractResult")
+.innerHTML=
+
+
+
+`
+<h3>Identitas</h3>
+
+Nama:
+<b>${student.nama}</b>
+
+<br>
+
+Kelas:
+<b>${student.kelas}</b>
+
+
+<hr>
+
+
+<h3>Kesepakatan Penilaian</h3>
+
+
+Kehadiran:
+${student.nilai.kehadiran}
+
+<br>
+
+Asesmen Sumatif:
+${student.nilai.sumatif}
+
+
+<br>
+
+Asesmen Akhir:
+${student.nilai.akhir}
+
+
+
+<hr>
+
+
+<h3>Diagnostik Pembelajaran</h3>
+
+
+Gaya Belajar:
+
+<b>${student.learningStyle}</b>
+
+
+<br>
+
+
+Media Favorit:
+
+<b>${student.media}</b>
+
+
+
+<hr>
+
+
+<h3>Komitmen Siswa</h3>
+
+
+${behaviorText}
+
+
+
+<br><br>
+
+
+Saya menyatakan siap mengikuti pembelajaran
+kelas XI TKJ Semester 1.
+
+
+
+`;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   PRINT
+========================================== */
 
 
 function printContract(){
 
+
 window.print();
 
+
 }
+
+
+
+
+
+
+/* ==========================================
+   LOAD DATA JIKA ADA
+========================================== */
+
+
+window.onload=function(){
+
+
+let saved =
+localStorage.getItem(
+"KontrakTKJ"
+);
+
+
+
+if(saved){
+
+
+console.log(
+"Data sebelumnya:",
+JSON.parse(saved)
+
+);
+
+
+}
+
+
+};
