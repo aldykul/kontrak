@@ -1,67 +1,498 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
+
 <head>
-<title>TKJ Academy Semester Challenge</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+TKJ Academy - Kontrak Belajar XI TKJ
+</title>
+
+
 <link rel="stylesheet" href="style.css">
+
+
 </head>
+
 
 <body>
 
 
-<div class="game">
-
-<h1>🎮 TKJ Academy</h1>
-<h2>Semester 1 Challenge</h2>
+<div class="container">
 
 
-<div id="player">
+<!-- HEADER -->
+
+<header class="header">
+
+<h1>
+🎮 TKJ ACADEMY
+</h1>
+
+<h2>
+Semester 1 Learning Agreement
+</h2>
+
+<p>
+Kontrak Belajar Digital Kelas XI TKJ
+</p>
+
+</header>
+
+
+
+<!-- IDENTITAS SISWA -->
+
+
+<section id="identity" class="card">
+
+
+<h3>
+👨‍💻 Identitas Siswa
+</h3>
+
+
 <label>
 Nama Siswa
 </label>
 
-<input id="nama" placeholder="Masukkan nama">
 
-<button onclick="mulai()">
-Mulai Misi
+<input 
+type="text"
+id="namaSiswa"
+placeholder="Masukkan nama lengkap">
+
+
+<label>
+Kelas
+</label>
+
+
+<select id="kelas">
+
+<option>
+XI TKJ
+</option>
+
+</select>
+
+
+
+<button onclick="startGame()">
+
+Mulai Misi 🚀
+
 </button>
 
+
+
+</section>
+
+
+
+
+
+<!-- GAME SECTION -->
+
+
+<section id="gameSection" class="card hidden">
+
+
+<h3 id="missionTitle">
+
+</h3>
+
+
+<p id="missionDescription">
+
+</p>
+
+
+<div id="missionOption">
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- VOTE NILAI -->
+
+
+<section id="assessmentSection" class="card hidden">
+
+
+<h3>
+📊 Misi 5 : Kesepakatan Bobot Nilai
+</h3>
+
+
+<p>
+Pilih komposisi penilaian yang menurut kamu paling adil.
+<br>
+Catatan: Kehadiran maksimal 20%.
+</p>
+
+
+
+<div class="vote-box">
+
+
+<button onclick="voteAssessment('20-40-40')">
+
+Kehadiran 20% <br>
+Sumatif 40% <br>
+Akhir 40%
+
+</button>
+
+
+
+<button onclick="voteAssessment('15-50-35')">
+
+Kehadiran 15% <br>
+Sumatif 50% <br>
+Akhir 35%
+
+</button>
+
+
+
+<button onclick="voteAssessment('20-50-30')">
+
+Kehadiran 20% <br>
+Sumatif 50% <br>
+Akhir 30%
+
+</button>
+
+
 </div>
 
 
 
-<div id="gameArea" class="hidden">
+</section>
 
 
-<h3 id="missionTitle"></h3>
-
-<p id="missionText"></p>
 
 
-<div id="choices"></div>
+
+
+
+<!-- DIAGNOSTIK GAYA BELAJAR -->
+
+
+<section id="learningSection" class="card hidden">
+
+
+<h3>
+🧠 Diagnostik Gaya Belajar
+</h3>
+
+
+<p>
+Bagaimana cara kamu paling mudah memahami materi TKJ?
+</p>
+
+
+
+<div class="learning-choice">
+
+
+<button onclick="chooseLearning('Visual')">
+
+👁 Visual
+
+</button>
+
+
+<button onclick="chooseLearning('Praktik')">
+
+🔧 Praktik
+
+</button>
+
+
+<button onclick="chooseLearning('Diskusi')">
+
+🗣 Diskusi
+
+</button>
+
+
+<button onclick="chooseLearning('Membaca')">
+
+📚 Membaca
+
+</button>
 
 
 </div>
 
 
-<div id="result" class="hidden">
+</section>
 
-<h2>🏆 Kontrak Belajar Selesai</h2>
 
-<p id="hasil"></p>
+
+
+
+
+
+
+<!-- MEDIA PEMBELAJARAN -->
+
+
+<section id="mediaSection" class="card hidden">
+
+
+<h3>
+💻 Pilihan Media Pembelajaran
+</h3>
+
+
+<p>
+Media apa yang ingin digunakan selama pembelajaran?
+</p>
+
+
+
+<div>
+
+
+<button onclick="chooseMedia('Cisco Packet Tracer')">
+
+🌐 Cisco Packet Tracer
+
+</button>
+
+
+<button onclick="chooseMedia('Praktik Hardware')">
+
+🔧 Praktik Hardware
+
+</button>
+
+
+<button onclick="chooseMedia('Video Tutorial')">
+
+🎥 Video Tutorial
+
+</button>
+
+
+<button onclick="chooseMedia('Modul Digital')">
+
+📖 Modul Digital
+
+</button>
+
+
+<button onclick="chooseMedia('Game Edukasi')">
+
+🎮 Game Edukasi
+
+</button>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- PERILAKU -->
+
+
+<section id="behaviorSection" class="card hidden">
+
+
+<h3>
+🤝 Komitmen Perilaku
+</h3>
+
+
+
+<p>
+Pilih komitmen kamu sebagai siswa TKJ profesional.
+</p>
+
+
+
+<label>
+
+<input 
+type="checkbox"
+value="Disiplin hadir tepat waktu">
+
+Disiplin hadir tepat waktu
+
+</label>
+
+
+<br>
+
+
+<label>
+
+<input 
+type="checkbox"
+value="Aktif dalam pembelajaran">
+
+Aktif dalam pembelajaran
+
+</label>
+
+
+<br>
+
+
+<label>
+
+<input 
+type="checkbox"
+value="Menyelesaikan tugas">
+
+Menyelesaikan tugas
+
+</label>
+
+
+<br>
+
+
+<label>
+
+<input 
+type="checkbox"
+value="Menjaga etika">
+
+Menjaga etika dan profesionalisme
+
+</label>
+
+
+
+
+<button onclick="generateContract()">
+
+Selesaikan Kontrak 🎓
+
+</button>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+<!-- HASIL KONTRAK -->
+
+
+<section id="resultSection" class="contract hidden">
+
+
+<h2>
+🏆 KONTRAK BELAJAR XI TKJ
+</h2>
+
+
+
+<div id="contractResult">
+
+</div>
+
+
+
+
+
+
+<!-- TANDA TANGAN -->
+
+
+<div class="signature-area">
+
+
+<div>
+
+Guru Mata Pelajaran
+
+
+<br><br><br>
+
+
+__________________
+
+
+</div>
+
+
+
+
+<div>
+
+
+Siswa
+
+
+<br><br><br>
+
+
+__________________
+
+
+</div>
+
+
+
+</div>
+
+
 
 
 <button onclick="printContract()">
-Cetak Komitmen
+
+🖨 Cetak Kontrak
+
 </button>
 
 
-</div>
+
+</section>
 
 
+
+
+
+
+
 </div>
+
 
 
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
